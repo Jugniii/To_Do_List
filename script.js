@@ -1,45 +1,42 @@
-let input=document.querySelector('.entered-list');
-let addBtn=document.querySelector('.add-list');
-let task=document.querySelector('.tasks');
+document.querySelector('#add').onclick = function(){
 
-input.addEventListener('keyup',()=>{
-	if(input.value.trim()!== 0){
-		addBtn.classList.add('active')
-	}
-	else{
-		addBtn.classList.remove('active')
-	}
-	
-})
-addBtn.addEventListener('click', () => {
-	if(input.value.trim() ! == 0){
-		let newItem = document.createElement('div');
-		newItem.classList.add('item');
-		newItem.innerHTML = `
-		<p> ${input.value}</p>
-		<div class="item-btn">
-		   <i class="fa-solid fa-pen-to-square"></i>
-		   <i class="fa-solid fa -xmark"></i>
-		   </div>
-		   `
-		   tasks.appendChild(newItem);
-		   input.value=' ';
 
-		   }
-else{
-	alert('Please enter a task')
-	}
+    if(document.querySelector('#createlist').value.length == 0){
+        alert("Please Enter a Task")
+    }
 
-})
-tasks.addEventListener('click',(e) =>{
-	if(e.target.classList.contains('fa-xmark')){
-		e.target.parent.parentElement.remove();
-	}
-})
+    else{
+        document.querySelector('#tasklist').innerHTML += `
+        <div class="task">
+        <span id="taskname"><i class="ri-focus-fill" id="point"></i>${document.querySelector("#createlist").value} </span>
+         <div class="icon">
+          <i class="ri-delete-bin-5-fill"></i>
+         </div>
+          </div>
+        `;
 
-tasks.addEventListener('click',(e)=>{
-	if(e.target.classList.contains('fa-pen-to-square'))
-	{
-		e.target.parentElement.parentElement.classList.toggle('completed');
-	}
-})
+        var current_tasks = document.querySelectorAll(".icon");
+        for(var i=0; i<current_tasks.length; i++){
+            current_tasks[i].onclick = function(){
+                this.parentNode.remove();
+            }
+        }
+
+
+
+        var task = document.querySelectorAll(".task");
+        for(var i=0; i<task.length; i++){
+            task[i].addEventListener("click", function(){
+              this.style.backgroundColor = "green"
+            })
+        }
+
+
+
+    }
+  }
+
+
+  document.querySelector("#add").addEventListener("click", function(){
+    document.querySelector("#createlist").value = " ";
+  })
